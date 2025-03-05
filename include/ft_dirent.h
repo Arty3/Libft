@@ -17,7 +17,6 @@
 # include "ft_syscall.h"
 # include "ft_unistd.h"
 # include "ft_memory.h"
-# include "ft_vector.h"
 # include "ft_string.h"
 
 # include <dirent.h>

@@ -24,7 +24,6 @@
 # include <errno.h>
 
 # include "ft_values.h"
-# include "__vm.h"
 
 # define __WORD_SIZE	8
 
@@ -43,8 +42,8 @@ static __always_inline int	is_likely_stack_ptr(void *p)
 {
 	char	stack_var;
 
-	return ((uintptr_t)p >= (uintptr_t)&stack_var - (1 << 20)
-		&& (uintptr_t)p <= (uintptr_t)&stack_var + (1 << 20));
+	return ((uintptr_t)p >= (uintptr_t)(&stack_var) - (1 << 20)
+		&& (uintptr_t)p <= (uintptr_t)(&stack_var) + (1 << 20));
 }
 
 void	*ft_memcpy(

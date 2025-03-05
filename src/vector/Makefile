@@ -44,7 +44,6 @@ SRC		= ft_add_v3.c				\
 		  ft_signed_angle_v3.c		\
 		  ft_slerp_v3.c				\
 		  ft_sqr_magnitude_v3.c		\
-		  ft_srt_cmp.c				\
 		  ft_sub_v3.c				\
 		  ft_sum_v3.c				\
 		  ft_remains_v3.c			\

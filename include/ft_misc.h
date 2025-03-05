@@ -22,13 +22,18 @@
 
 # include "../src/misc/frpath/__frpath.h"
 
-#define __at_exit_stack_handlers	32
+# define __AT_EXIT_STACK_HANDLERS	32
 
+/*
+	Note, change the array sizes to __AT_EXIT_STACK_HANDLERS value
+	Norminette is the peak of stupidity so it doesnt allow macro
+	constant array lengths
+*/
 typedef struct s_fl
 {
 	struct s_fl	*next;
-	void		(*f[__at_exit_stack_handlers])(void *);
-	void		*a[__at_exit_stack_handlers];
+	void		(*f[32])(void *);
+	void		*a[32];
 }	t_fl;
 
 typedef struct s_exit_ctx

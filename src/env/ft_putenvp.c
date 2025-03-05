@@ -87,7 +87,6 @@ int	__ft_putenvp(char *s, size_t l, char *r, char ***__envp)
 	static char	**oldenv;
 	char		**newenv;
 	t_args1		args1;
-	t_args2		args2;
 
 	args1.s = s;
 	args1.r = r;
@@ -96,15 +95,12 @@ int	__ft_putenvp(char *s, size_t l, char *r, char ***__envp)
 	args1.__envp = __envp;
 	if (__update_existing(&args1) == 0)
 		return (EXIT_SUCCESS);
-	args2.i = args1.i;
-	args2.r = r;
-	args2.__envp = __envp;
-	if (__do_env_alloc(&oldenv, &newenv, &args2) == -1)
+	if (__do_env_alloc(&oldenv, &newenv, &(t_args2){__envp, r, args1.i}) == -1)
 		return (-1);
 	if (__register_cleanup(&oldenv) != 0)
 		return (-1);
-	newenv[args2.i] = s;
-	newenv[args2.i + 1] = 0;
+	newenv[args1.i] = s;
+	newenv[args1.i + 1] = 0;
 	oldenv = newenv;
 	*__envp = oldenv;
 	if (r)

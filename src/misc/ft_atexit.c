@@ -6,7 +6,7 @@
 /*   By: lgoddijn <lgoddijn@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:45:21 by lgoddijn          #+#    #+#             */
-/*   Updated: 2024/11/13 17:54:19 by lgoddijn         ###   ########.fr       */
+/*   Updated: 2025/03/05 11:07:23 by lgoddijn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static __always_inline t_exit_ctx	*__get_exit_context(void)
 {
 	static t_exit_ctx	ctx = {
 		.head = &ctx.builtin,
-		.builtin = { NULL, {NULL}, {NULL} },
+		.builtin = {NULL, {NULL}, {NULL}},
 		.finished = 0,
 		.slot = 0
 	};
@@ -33,7 +33,7 @@ __attribute__((destructor)) void	__call_on_exit(void)
 	ctx = __get_exit_context();
 	while (ctx->head)
 	{
-		ctx->slot = __at_exit_stack_handlers;
+		ctx->slot = __AT_EXIT_STACK_HANDLERS;
 		while (ctx->slot-- > 0)
 		{
 			fn = ctx->head->f[ctx->slot];
@@ -52,7 +52,7 @@ __attribute__((destructor)) void	__call_on_exit(void)
 	assuming single-threaded context.
 	Or external mutex lock.
 */
-static int	__ft_cxa_atexit(void (*fn)(void *), void *arg)
+int	ft_atexit(void (*fn)(void *), void *arg)
 {
 	t_exit_ctx	*ctx;
 	t_fl		*new_fl;
@@ -62,7 +62,7 @@ static int	__ft_cxa_atexit(void (*fn)(void *), void *arg)
 	ctx = __get_exit_context();
 	if (ctx->finished)
 		return (-1);
-	if (ctx->slot == __at_exit_stack_handlers)
+	if (ctx->slot == __AT_EXIT_STACK_HANDLERS)
 	{
 		new_fl = ft_calloc(sizeof(t_fl), 1);
 		if (!new_fl)
@@ -76,6 +76,3 @@ static int	__ft_cxa_atexit(void (*fn)(void *), void *arg)
 	++ctx->slot;
 	return (0);
 }
-
-extern int	ft_atexit(void (*fn)(void *), void *arg)
-			__attribute__((weak, alias("__ft_cxa_atexit")));

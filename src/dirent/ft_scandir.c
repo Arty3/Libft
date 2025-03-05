@@ -67,7 +67,7 @@ int	ft_scandir(t_scandir_args *args)
 	}
 	errno = loc.oerrno;
 	if (args->cmp)
-		ft_srt_cmp(loc.names, loc.cnt, sizeof(*(loc.names)),
+		qsort(loc.names, loc.cnt, sizeof(*(loc.names)),
 			(int (*)(const void *, const void *))args->cmp);
 	*(args->res) = loc.names;
 	return (loc.cnt);

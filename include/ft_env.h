@@ -43,7 +43,6 @@ typedef enum e_rmadd_ret
 	RETURN,
 }	t_rmadd_ret;
 
-
 void	__free2d_env_alloc(void *alloc);
 
 void	__envp_rm_add(char *old, char *new);

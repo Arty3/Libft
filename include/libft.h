@@ -29,7 +29,6 @@
 #  error "Only Little Endian Byte Order Supported."
 # endif
 
-# include "ft_atomic_arch.h"
 # include "ft_dirent.h"
 # include "ft_env.h"
 # include "ft_syscall.h"
