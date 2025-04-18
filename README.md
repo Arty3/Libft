@@ -38,7 +38,7 @@ I personally used this library in most of my C projects there, providing me with
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/DontCallMeLuca/Libft.git
+git clone https://github.com/Arty3/Libft.git
 cd Libft
 ```
 
